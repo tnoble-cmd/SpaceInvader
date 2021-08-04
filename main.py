@@ -30,7 +30,11 @@ bulletX_change = 0
 bulletY_change = 15
 bullet_state = "ready"
 
-score = 0
+#Score
+score_value = 0
+font = pygame.font.Font('freesansbold.ttf', 20)
+textX = 10
+textY = 10
 
 #Enemy
 enemyImg = []
@@ -48,7 +52,11 @@ for i in range(num_of_enemies):
     enemyY_change.append(40)
 
 
-#.blit means to draw (player-ship on screen)
+#.blit means to draw (player-ship on screen)/Type Casting score font...
+def show_score(x,y):
+    score = font.render("score :"+ str(score_value),True, (255, 255, 255))
+    screen.blit(score, (x, y))
+
 def player(x, y):
     screen.blit(playerImg, (x, y))
 
@@ -116,8 +124,7 @@ while running:
         if collision:
             bulletY = 880
             bullet_state = "ready"
-            score += 1
-            print(score)
+            score_value += 1
             enemyX[i] = random.randint(0, 1200)
             enemyY[i] = random.randint(50, 250)
 
@@ -132,7 +139,7 @@ while running:
 
 
     player(playerX, playerY)
-
+    show_score(textX, textY)
     pygame.display.update()
 
     pass
